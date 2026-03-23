@@ -1,5 +1,6 @@
 package com.amore_in_canto.amoerincantoX.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String nome;
@@ -25,6 +26,7 @@ public class Usuario {
     @Column(nullable = false, length = 150)
     private String password;
 
+    @JsonIgnore
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
