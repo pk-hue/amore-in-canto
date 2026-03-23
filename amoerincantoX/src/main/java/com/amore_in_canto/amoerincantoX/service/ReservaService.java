@@ -19,14 +19,16 @@ public class ReservaService {
         this.reservaRepository = reservaRepository;
     };
 
-    public Reserva cadastrarReserva(String email){
-        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Cliente não encontrado."));
+    public Reserva cadastrarReserva(Long usuarioId, LocalDate startDate, LocalDate endDate, Status status){
 
-        Reserva novaReserva = new  Reserva();
-        novaReserva.setUsuario(usuario);
-        novaReserva.setStartDate(LocalDate.now());
-        novaReserva.setStatus(Status.REQUESTED);
+        Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
-        return  reservaRepository.save(novaReserva);
+        Reserva reserva = Reserva.builder().usuario(usuario).status(Status.REQUESTED).build();
+
+//       novaReserva.setUsuario(usuario);
+//       novaReserva.setStartDate(LocalDate.now());
+//       novaReserva.setStatus(Status.REQUESTED);
+
+        return  reservaRepository.save(reserva);
     };
 }

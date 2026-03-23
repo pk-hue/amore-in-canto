@@ -29,4 +29,9 @@ public class UsuarioController{
         List<Usuario> usuarios = usuarioService.findByemail();
         return ResponseEntity.ok(usuarios);
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
 }
