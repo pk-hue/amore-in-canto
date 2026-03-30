@@ -1,12 +1,14 @@
 package com.amore_in_canto.amoerincantoX.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Builder
 @Entity @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -30,8 +32,9 @@ public class Usuario {
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
-    private List<Reserva> reservas;
+    private List<Reserva> reservas = new ArrayList();
 
     @PrePersist
     public void onCreate(){

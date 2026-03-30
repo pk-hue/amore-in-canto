@@ -1,12 +1,17 @@
 package com.amore_in_canto.amoerincantoX.domain;
 
 import com.amore_in_canto.amoerincantoX.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Builder
 @Entity @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -29,6 +34,7 @@ public class Reserva {
     private LocalDate endDate;
 
     @Column(nullable = false, length = 40)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Column(nullable = false, name = "created_at")

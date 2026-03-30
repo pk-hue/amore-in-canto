@@ -8,6 +8,7 @@ import com.amore_in_canto.amoerincantoX.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ReservaService {
@@ -23,12 +24,14 @@ public class ReservaService {
 
         Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
-        Reserva reserva = Reserva.builder().usuario(usuario).status(Status.REQUESTED).build();
+        Reserva reserva = Reserva.builder().usuario(usuario).startDate(startDate).endDate(endDate).status(status).build();
 
-//       novaReserva.setUsuario(usuario);
-//       novaReserva.setStartDate(LocalDate.now());
-//       novaReserva.setStatus(Status.REQUESTED);
+        usuario.getReservas().add(reserva);
 
         return  reservaRepository.save(reserva);
     };
+
+    public List<Reserva> ListarReservas() {
+        return reservaRepository.findAll();
+    }
 }
