@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,15 +25,13 @@ public class ReservaController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Reserva> cadastrarReserva(@RequestBody ReservaRequest request){
         Reserva reserva = reservaService.cadastrarReserva(request.getUsuarioId(), request.getStartDate(), request.getEndDate(), request.getStatus());
+        System.out.println(request.getStatus());
         return ResponseEntity.status(HttpStatus.CREATED).body(reserva);
     }
-//    public ResponseEntity<Reserva> cadastrarReserva(@RequestParam Long usuarioId, @RequestParam(name = "status") Status status){
-//        Reserva reserva = reservaService.cadastrarReserva(usuarioId, status);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(reserva);
-//    }
 
     @GetMapping
-    public String test(){
-        return "test";
+    public ResponseEntity<List<Reserva>> listarReservas(){
+        List<Reserva> reservas = reservaService.ListarReservas();
+        return ResponseEntity.ok(reservas);
     }
 }
