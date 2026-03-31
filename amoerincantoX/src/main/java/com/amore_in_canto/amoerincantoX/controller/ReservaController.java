@@ -25,7 +25,6 @@ public class ReservaController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Reserva> cadastrarReserva(@RequestBody ReservaRequest request){
         Reserva reserva = reservaService.cadastrarReserva(request.getUsuarioId(), request.getStartDate(), request.getEndDate(), request.getStatus());
-        System.out.println(request.getStatus());
         return ResponseEntity.status(HttpStatus.CREATED).body(reserva);
     }
 

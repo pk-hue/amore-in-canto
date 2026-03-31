@@ -26,6 +26,10 @@ public class ReservaService {
 
         Reserva reserva = Reserva.builder().usuario(usuario).startDate(startDate).endDate(endDate).status(status).build();
 
+        if(reserva.getStartDate().isAfter(reserva.getEndDate())){
+            throw new RuntimeException("Data invalida.");
+        }
+
         usuario.getReservas().add(reserva);
 
         return  reservaRepository.save(reserva);
