@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Builder
 @Entity @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -35,6 +34,10 @@ public class Usuario {
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Reserva> reservas = new ArrayList();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
+    private List<Bloqueio> bloqueios = new ArrayList();
 
     @PrePersist
     public void onCreate(){

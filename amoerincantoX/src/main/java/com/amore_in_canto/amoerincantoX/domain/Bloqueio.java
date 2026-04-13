@@ -1,6 +1,6 @@
 package com.amore_in_canto.amoerincantoX.domain;
 
-import com.amore_in_canto.amoerincantoX.domain.enums.Status;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,14 +8,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
-@Entity @Getter @Setter
+@Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-@Table(name = "reserva")
-public class Reserva {
+@Table(name = "bloqueio_date")
+@Entity
+public class Bloqueio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reserva_id")
+    @Column(name = "bloqueio_id ")
     private Long id;
 
     @ManyToOne
@@ -28,9 +29,8 @@ public class Reserva {
     @Column(nullable = false, name = "end_date")
     private LocalDate endDate;
 
-    @Column(nullable = false, length = 40)
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    @Column(name = "reason",  nullable = false, length = 240)
+    private String motivo;
 
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
