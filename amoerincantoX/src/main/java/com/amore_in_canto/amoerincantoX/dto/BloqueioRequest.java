@@ -3,7 +3,7 @@ package com.amore_in_canto.amoerincantoX.dto;
 import java.time.LocalDate;
 
 public class BloqueioRequest {
-    private  Long usuarioId;
+    private Long usuarioId;
     private LocalDate startDate;
     private LocalDate endDate;
     private String motivo;
