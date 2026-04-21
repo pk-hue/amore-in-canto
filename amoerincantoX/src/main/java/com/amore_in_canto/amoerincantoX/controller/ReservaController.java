@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios/{usuarioId}/reservas")
+@RequestMapping("/usuarios/reservas")
 public class ReservaController {
 
     private final ReservaService reservaService;
@@ -24,7 +24,7 @@ public class ReservaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Reserva> cadastrarReserva(@RequestBody ReservaRequest request){
-        Reserva reserva = reservaService.cadastrarReserva(request.getUsuarioId(), request.getStartDate(), request.getEndDate(), request.getStatus());
+        Reserva reserva = reservaService.cadastrarReserva(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(reserva);
     }
 

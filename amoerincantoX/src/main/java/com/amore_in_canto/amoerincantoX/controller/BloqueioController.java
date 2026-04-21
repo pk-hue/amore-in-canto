@@ -19,8 +19,8 @@ public class BloqueioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Bloqueio> criarBloqueio(@RequestBody BloqueioRequest bloqueioRequest){
-        Bloqueio bloqueio = bloqueioService.bloquearData(bloqueioRequest.getUsuarioId(), bloqueioRequest.getStartDate(), bloqueioRequest.getEndDate(), bloqueioRequest.getMotivo());
+    public ResponseEntity<Bloqueio> criarBloqueio(@RequestBody BloqueioRequest request){
+        Bloqueio bloqueio = bloqueioService.bloquearData(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(bloqueio);
     }
 
