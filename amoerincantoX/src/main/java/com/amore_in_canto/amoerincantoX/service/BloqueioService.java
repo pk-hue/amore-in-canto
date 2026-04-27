@@ -7,6 +7,7 @@ import com.amore_in_canto.amoerincantoX.dto.BloqueioRequest;
 import com.amore_in_canto.amoerincantoX.repository.ReservaRepository;
 import com.amore_in_canto.amoerincantoX.repository.UsuarioRepository;
 import com.amore_in_canto.amoerincantoX.repository.BloqueioRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -28,6 +29,12 @@ public class BloqueioService {
     public Bloqueio bloquearData(BloqueioRequest request){
 
         Usuario usuario = usuarioRepository.findById(request.getUsuarioId()).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+
+        boolean dataJaReservada = reservaRepository.existsByPeriodo(request.getStartDate(), request.getEndDate());
+
+        if(dataJaReservada){
+            throw new RuntimeException("Data ja reservada.");
+        }
 
         Bloqueio bloqueio = Bloqueio.builder().usuario(usuario).startDate(request.getStartDate()).endDate(request.getEndDate()).motivo(request.getMotivo()).build();
 

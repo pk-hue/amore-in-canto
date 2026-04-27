@@ -15,8 +15,8 @@ import java.util.Optional;
 public interface BloqueioRepository extends JpaRepository<Bloqueio,Long>, JpaSpecificationExecutor<Bloqueio>{
     Optional<Bloqueio> findById(Long id);
 
-    @Query("SELECT COUNT(b) > 0 FROM Bloqueio b WHERE b.usuario = :usuario " + "AND (:startDate <= b.endDate AND :endDate >= b.startDate)")
+    @Query("SELECT COUNT(b) > 0 FROM Bloqueio b WHERE (:startDate <= b.endDate AND :endDate >= b.startDate)")
 
-    boolean existsByUsuarioAndPeriodo(@Param("usuario") Usuario usuario, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    boolean existsByPeriodo(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }
 
