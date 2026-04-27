@@ -32,7 +32,7 @@ public class ReservaService {
             throw new RuntimeException("Data invalida.");
         }
 
-        boolean dataBloqueada = bloqueioRepository.existsByUsuarioAndPeriodo(usuario, request.getStartDate(), request.getEndDate());
+        boolean dataBloqueada = bloqueioRepository.existsByPeriodo(request.getStartDate(), request.getEndDate());
 
         if(dataBloqueada){
             throw new RuntimeException("Esta data foi bloqueada pelo Administrador!");
