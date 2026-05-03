@@ -28,6 +28,10 @@ public class ReservaService {
 
         Usuario usuario = usuarioRepository.findById(request.getUsuarioId()).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
+        if(request.getStartDate().isBefore(LocalDate.now())){
+            throw new RuntimeException("Não é possível criar uma reserva para uma data no passado");
+        };
+
         if(request.getStartDate().isAfter(request.getEndDate())){
             throw new RuntimeException("Data invalida.");
         }
@@ -36,6 +40,13 @@ public class ReservaService {
 
         if(dataBloqueada){
             throw new RuntimeException("Esta data foi bloqueada pelo Administrador!");
+        }
+
+        List<Status> statusAtivo = List.of(Status.REQUESTED, Status.APPROVED);
+        boolean dataJaBloqueada = reservaRepository.existsByPeriodoAndStatusIn(request.getStartDate(), request.getEndDate(), statusAtivo);
+
+        if(dataJaBloqueada){
+            throw new RuntimeException("Já exixte uma reserva solicitada ou aprovada nesta data!");
         }
 
         Reserva reserva = Reserva.builder().usuario(usuario).startDate(request.getStartDate()).endDate(request.getEndDate()).status(request.getStatus()).build();
