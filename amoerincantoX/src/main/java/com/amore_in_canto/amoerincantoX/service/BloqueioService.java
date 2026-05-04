@@ -32,6 +32,10 @@ public class BloqueioService {
 
         boolean dataJaReservada = reservaRepository.existsByPeriodo(request.getStartDate(), request.getEndDate());
 
+        if(request.getStartDate().isBefore(LocalDate.now())){
+            throw new RuntimeException("Não é possível criar uma reserva para uma data no passado");
+        };
+
         if(dataJaReservada){
             throw new RuntimeException("Data ja reservada.");
         }
