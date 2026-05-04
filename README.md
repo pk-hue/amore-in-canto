@@ -41,3 +41,42 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 ```bash
 git clone [https://github.com/seu-usuario/amoerincantox.git](https://github.com/seu-usuario/amoerincantox.git)
 cd amoerincantox
+```
+**2. Configure o Banco de Dados**
+
+No arquivo src/main/resources/application.properties, ajuste as credenciais:
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/nome_do_banco
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+spring.jpa.hibernate.ddl-auto=update
+```
+
+**3. Execute a aplicação**
+
+```
+./mvnw spring-boot:run
+```
+
+## 📂 Estrutura do Projeto
+
+*  **controller:** Endpoints REST da API.
+
+*  **service:** Camada de regras de negócio.
+
+*  **repository:** Interfaces de comunicação com o banco de dados.
+
+*  **model:** Entidades mapeadas pelo JPA.
+
+*  **dto:** Padrão Data Transfer Object para segurança e performance.
+
+## Autor
+**Pedro Henrique**
+
+**Software Engineering Student & Backend Developer**
+
+**LinkedIn:**
+linkedin.com/in/pedro-hue
+
+**GitHub:**
+github.com/pk-hue
