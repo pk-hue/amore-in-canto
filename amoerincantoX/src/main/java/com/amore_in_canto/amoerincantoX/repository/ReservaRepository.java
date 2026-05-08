@@ -19,6 +19,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>, JpaSpec
     @Query("SELECT COUNT(r) > 0 FROM Reserva r WHERE (:startDate <= r.endDate AND :endDate >= r.startDate)")
     boolean existsByPeriodo(@Param("startDate")LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    @Query("SELECT COUNT(r) > 0 FROM Reserva r WHERE (:startDate <= r.endDate And :endDate >= r.endDate) AND r.status IN :statusList")
+    @Query("SELECT COUNT(r) > 0 FROM Reserva r WHERE (:startDate <= r.endDate And :endDate >= r.sartDate) AND r.status IN :statusList")
     boolean existsByPeriodoAndStatusIn(@Param("startDate")LocalDate startDate, @Param("endDate") LocalDate endDate, @Param("statusList") List<Status> statusList);
 }

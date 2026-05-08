@@ -37,14 +37,12 @@ public class ReservaService {
         }
 
         boolean dataBloqueada = bloqueioRepository.existsByPeriodo(request.getStartDate(), request.getEndDate());
-
         if(dataBloqueada){
             throw new RuntimeException("Esta data foi bloqueada pelo Administrador!");
         }
 
         List<Status> statusAtivo = List.of(Status.REQUESTED, Status.APPROVED);
         boolean dataJaBloqueada = reservaRepository.existsByPeriodoAndStatusIn(request.getStartDate(), request.getEndDate(), statusAtivo);
-
         if(dataJaBloqueada){
             throw new RuntimeException("Já exixte uma reserva solicitada ou aprovada nesta data!");
         }
@@ -58,5 +56,38 @@ public class ReservaService {
 
     public List<Reserva> ListarReservas() {
         return reservaRepository.findAll();
+    }
+
+    public Reserva aprovarReserva(Long id){
+        Reserva reserva = reservaRepository.findById(id).orElseThrow(() -> new RuntimeException("Reserva inexistente."));
+
+        if(reserva.getStatus() != Status.REQUESTED){
+            throw new RuntimeException("Apenas reservas com status REQUESTED podem ser aprovadas!");
+        }
+
+        boolean dataBloqueada = bloqueioRepository.existsByPeriodo(reserva.getStartDate(), reserva.getEndDate());
+        if(dataBloqueada){
+            throw new RuntimeException("Não é possível aprovar: Esta data foi bloqueada pelo Administrador!");
+        }
+
+        List<Status> statusAprovado = List.of(Status.APPROVED);
+        boolean dataJaOcupada = reservaRepository.existsByPeriodoAndStatusIn(reserva.getStartDate(), reserva.getEndDate(), statusAprovado);
+        if(dataJaOcupada){
+            throw new RuntimeException("Não é possível aprovar: Já existe outra reserva APROVADA para este período.");
+        }
+
+        reserva.setStatus(Status.APPROVED);
+        return  reservaRepository.save(reserva);
+    };
+
+    public Reserva recusarReserva(Long id){
+        Reserva reserva = reservaRepository.findById(id).orElseThrow(() -> new RuntimeException("Reserva inexistente."));
+
+        if(reserva.getStatus() != Status.REQUESTED){
+            throw new RuntimeException("Apenas reservas com status REQUESTED podem ser recusadas!");
+        }
+
+        reserva.setStatus(Status.REJECTED);
+        return  reservaRepository.save(reserva);
     }
 }
