@@ -33,4 +33,16 @@ public class ReservaController {
         List<Reserva> reservas = reservaService.ListarReservas();
         return ResponseEntity.ok(reservas);
     }
+
+    @PatchMapping("/{id}/aprovar")
+    public ResponseEntity<Reserva> aprovarReserva(@PathVariable Long id){
+        Reserva reservaAprovada = reservaService.aprovarReserva(id);
+        return ResponseEntity.ok(reservaAprovada);
+    }
+
+    @PatchMapping("/{id}/recusar")
+    public ResponseEntity<Reserva> recusarReserva(@PathVariable Long id){
+        Reserva reservaRecusada = reservaService.recusarReserva(id);
+        return ResponseEntity.ok(reservaRecusada);
+    }
 }
