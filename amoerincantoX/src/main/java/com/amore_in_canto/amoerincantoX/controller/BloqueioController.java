@@ -24,10 +24,10 @@ public class BloqueioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(bloqueio);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Bloqueio>> listarBloqueios(){
-        List<Bloqueio> bloqueios = bloqueioService.listarbloqueios();
+    public ResponseEntity<List<Bloqueio>> listarBloqueioPorUsuario(@PathVariable Long usuarioId){
+        List<Bloqueio> bloqueios = bloqueioService.listarBloqueioPorUsuario(usuarioId);
         return ResponseEntity.ok(bloqueios);
     }
 }

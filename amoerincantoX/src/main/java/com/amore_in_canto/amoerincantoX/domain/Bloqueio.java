@@ -16,7 +16,7 @@ public class Bloqueio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bloqueio_id ")
+    @Column(name = "bloqueio_id")
     private Long id;
 
     @ManyToOne
