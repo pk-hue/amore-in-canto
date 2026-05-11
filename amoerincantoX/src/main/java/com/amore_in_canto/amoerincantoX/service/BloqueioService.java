@@ -47,7 +47,10 @@ public class BloqueioService {
         return bloqueioRepository.save(bloqueio);
     }
 
-    public List<Bloqueio> listarbloqueios() {
-        return  bloqueioRepository.findAll();
+    public List<Bloqueio> listarBloqueioPorUsuario(Long usuarioId){
+        if(!bloqueioRepository.existsById(usuarioId)){
+            throw new RuntimeException("Usuário não encontrado.");
+        }
+        return bloqueioRepository.findByUsuarioId(usuarioId);
     }
 }

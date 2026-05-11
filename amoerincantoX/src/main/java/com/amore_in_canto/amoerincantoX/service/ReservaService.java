@@ -54,8 +54,11 @@ public class ReservaService {
         return  reservaRepository.save(reserva);
     };
 
-    public List<Reserva> ListarReservas() {
-        return reservaRepository.findAll();
+    public List<Reserva> ListarReservasPorUsuario(Long id) {
+        if(!usuarioRepository.existsById(id)){
+            throw new RuntimeException("Usuário não encontrado.");
+        }
+        return reservaRepository.findByUsuarioId(id);
     }
 
     public Reserva aprovarReserva(Long id){

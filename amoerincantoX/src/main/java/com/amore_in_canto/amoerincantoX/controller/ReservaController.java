@@ -28,9 +28,10 @@ public class ReservaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(reserva);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Reserva>> listarReservas(){
-        List<Reserva> reservas = reservaService.ListarReservas();
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Reserva>> ListarPorUsuario(@PathVariable Long id){
+        List<Reserva> reservas = reservaService.ListarReservasPorUsuario(id);
         return ResponseEntity.ok(reservas);
     }
 
