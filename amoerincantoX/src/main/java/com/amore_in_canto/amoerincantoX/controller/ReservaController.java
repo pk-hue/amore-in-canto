@@ -1,16 +1,12 @@
 package com.amore_in_canto.amoerincantoX.controller;
 
 import com.amore_in_canto.amoerincantoX.domain.Reserva;
-import com.amore_in_canto.amoerincantoX.domain.Usuario;
-import com.amore_in_canto.amoerincantoX.domain.enums.Status;
 import com.amore_in_canto.amoerincantoX.dto.ReservaRequest;
 import com.amore_in_canto.amoerincantoX.service.ReservaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

@@ -1,13 +1,11 @@
 package com.amore_in_canto.amoerincantoX.service;
 
 import com.amore_in_canto.amoerincantoX.domain.Usuario;
-import com.amore_in_canto.amoerincantoX.domain.Reserva;
 import com.amore_in_canto.amoerincantoX.domain.Bloqueio;
 import com.amore_in_canto.amoerincantoX.dto.BloqueioRequest;
 import com.amore_in_canto.amoerincantoX.repository.ReservaRepository;
 import com.amore_in_canto.amoerincantoX.repository.UsuarioRepository;
 import com.amore_in_canto.amoerincantoX.repository.BloqueioRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

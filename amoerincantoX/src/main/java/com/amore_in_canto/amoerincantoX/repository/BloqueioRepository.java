@@ -1,7 +1,6 @@
 package com.amore_in_canto.amoerincantoX.repository;
 
 import com.amore_in_canto.amoerincantoX.domain.Bloqueio;
-import com.amore_in_canto.amoerincantoX.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
