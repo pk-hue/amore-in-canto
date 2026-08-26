@@ -25,7 +25,7 @@ public class UsuarioService {
         //Usuario.builder().email(usuario.getEmail()).nome(usuario.getNome()).build();
 
         if(usuarioRepository.existsByEmail(usuario.getEmail())){
-            throw new IllegalArgumentException("Email já cadastrado");
+            throw new IllegalArgumentException("Email já cadastrado por outro usuario");
         }
 
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
